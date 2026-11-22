@@ -32,9 +32,9 @@
 const models=[
 ["iPhone 18 Pro","256GB",996,42],["iPhone 18 Pro Max","256GB",1150,29],["iPhone 18 Pro Max","512GB",1330,17],
 ["iPhone 17","256GB",598,104],["iPhone 17 Pro","256GB",752,226],["iPhone 17 Pro","512GB",823,29],["iPhone 17 Pro","1TB",910,9],["iPhone 17 Pro Max","256GB",822,298],["iPhone 17 Pro Max","512GB",876,77],["iPhone 17 Pro Max","1TB",964,36],["iPhone 17 Pro Max","2TB",1128,18],["iPhone 17e","256GB",493,22],
-["iPhone 16","128GB",385,124],["iPhone 16","256GB",433,20],["iPhone 16 Plus","128GB",435,53],["iPhone 16 Plus","256GB",513,18],
-["iPhone 15","128GB",360,110],["iPhone 15 Pro","256GB",396,43],["iPhone 15 Pro Max","256GB",0,0],
-["iPhone 14","128GB",260,357],["iPhone 14 Pro","256GB",345,29],
+["iPhone 16","128GB",385,124],["iPhone 16","256GB",433,20],["iPhone 16 Plus","128GB",435,53],["iPhone 16 Plus","256GB",513,18],["iPhone 16 Pro","128GB",495,0],["iPhone 16 Pro Max","256GB",565,0],
+["iPhone 15","128GB",360,110],["iPhone 15 Pro","256GB",396,43],["iPhone 15 Pro Max","256GB",450,0],
+["iPhone 14","128GB",260,357],["iPhone 14 Pro","256GB",345,0],["iPhone 14 Pro Max","256GB",430,0],
 ["iPhone 13","256GB",165,21],["iPhone 13 Mini","128GB",141,74],["iPhone 13 Pro","128GB",200,70],["iPhone 13 Pro","256GB",223,36],["iPhone 13 Pro Max","128GB",232,80],["iPhone 13 Pro Max","256GB",261,57],["iPhone 13 Pro Max","512GB",286,10],["iPhone 13 Pro Max","1TB",310,12],
 ["iPhone 12","64GB",96,121],["iPhone 12","128GB",109,42],["iPhone 12","256GB",126,13],["iPhone 12 Mini","64GB",90,74],["iPhone 12 Mini","128GB",95,40],["iPhone 12 Pro","128GB",136,58],["iPhone 12 Pro","256GB",151,28],["iPhone 12 Pro Max","128GB",172,55],["iPhone 12 Pro Max","256GB",208,36],["iPhone 12 Pro Max","512GB",215,17],
 ["iPhone 11","64GB",79,218],["iPhone 11","128GB",89,59],["iPhone 11","256GB",105,9],["iPhone 11 Pro","64GB",89,35],["iPhone 11 Pro","256GB",124,26],["iPhone 11 Pro Max","64GB",105,23],["iPhone 11 Pro Max","256GB",157,25],
@@ -44,7 +44,7 @@ const tariff=[270,380,490,625,765,905,1060,1210,1360,1510,1660,1815,1960,2115,22
 const $=id=>document.getElementById(id),n=id=>Math.max(0,Number($(id).value)||0),fmt=x=>'K'+x.toLocaleString('en-ZM',{minimumFractionDigits:0,maximumFractionDigits:0});
 const select=$('model');models.forEach((m,i)=>{const o=document.createElement('option');o.value=i;o.textContent=m[0]+' · '+m[1]+(m[2]?' — £'+m[2]:' — add live price');select.appendChild(o)});
 function shippingFor(kg){if(kg<=0)return 0;let half=Math.ceil((kg-1e-9)*2)/2;if(half<=10)return tariff[Math.max(0,Math.ceil(half*2)-1)];return 3025+Math.ceil((half-10)*2)*150}
-function updateFromModel(){if(select.value==='')return;const m=models[Number(select.value)];if(m[2])$('market').value=m[2];else $('market').value='';$('modelInfo').textContent=m[2]?'Benchmark based on '+m[3]+' observed sales for '+m[0]+' '+m[1]+'. Use the editable UK price field to replace this with the exact eBay listing price.':'No reliable model/storage benchmark in the captured dataset for this configuration. Enter the actual eBay UK price manually.';calculate()}
+function updateFromModel(){if(select.value==='')return;const m=models[Number(select.value)];if(m[2])$('market').value=m[2];else $('market').value='';$('modelInfo').textContent=m[2]?'Indicative UK eBay benchmark for '+m[0]+' '+m[1]+'. It is based on recent completed-sale data where available and current eBay listing snapshots for selected newer Pro models. Replace it with the exact listing price you find.':'No reliable model/storage benchmark captured for this configuration. Enter the actual eBay UK price manually.';calculate()}
 function calculate(){
  const m=select.value===''?null:models[Number(select.value)],base=n('market'),ukPostage=n('ukPostage'),factor=n('premium')||1,rate=n('rate'),actual=n('actual'),extra=n('extra'),target=n('profitTarget');
  const l=n('length'),w=n('width'),h=n('height'),hasDims=l>0&&w>0&&h>0,vol=hasDims?l*w*h/6000:0,charge=Math.max(actual,vol),ship=shippingFor(charge);
