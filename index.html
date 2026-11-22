@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UK to Zambia Preorder Price Calculator</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#0b0e14;color:#f4f6fb}
+*{box-sizing:border-box}body{margin:0;padding:22px;background:linear-gradient(145deg,#090b10,#171c27);min-height:100vh}
+main{max-width:900px;margin:auto}.tag{color:#ff6262;font-size:.78rem;font-weight:800;letter-spacing:.14em}
+h1{font-size:clamp(1.8rem,5vw,2.6rem);margin:.3rem 0}.sub,.hint,.note{color:#aab3c2}
+.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin-top:20px}
+.panel{background:#151b26;border:1px solid #303949;border-radius:18px;padding:20px}
+h2{font-size:1.08rem;margin:0 0 16px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+label{display:block;color:#cbd2dd;font-size:.83rem;margin-bottom:6px}
+input{width:100%;padding:12px;border-radius:10px;border:1px solid #3a4658;background:#0b1018;color:white;font-size:1rem}
+input:focus{outline:2px solid #e9343c;border-color:transparent}.full{grid-column:1/-1}
+.hero{background:linear-gradient(130deg,#e52a32,#8f101b);border-radius:14px;padding:18px;margin-bottom:16px}
+.hero small{font-weight:800;letter-spacing:.08em}.hero strong{display:block;font-size:clamp(2rem,7vw,3rem);margin:5px 0}
+.rows{display:grid;gap:11px}.row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #303949;padding-bottom:9px}
+.row span{color:#aab3c2}.row b{text-align:right;font-variant-numeric:tabular-nums}
+.green{color:#4cdda0!important}.red{color:#ff7d82!important}
+button{border:0;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer;margin:14px 8px 0 0}
+.primary{background:#e52a32;color:white}.secondary{background:#303949;color:white}
+.note{font-size:.78rem;line-height:1.5;margin-top:15px}.formula{background:#0e141e;border:1px solid #303949;border-radius:12px;padding:13px;margin-top:15px;font-size:.82rem;color:#cbd2dd}
+@media(max-width:720px){body{padding:14px}.grid{grid-template-columns:1fr}.fields{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.fields{grid-template-columns:1fr}}
+</style></head>
+<body><main>
+<div class="tag">PREORDER BUSINESS TOOL</div><h1>UK → Zambia Price Calculator</h1>
+<p class="sub">Calculate landed cost, shipping and your selling price in Zambian kwacha.</p>
+<div class="grid">
+<section class="panel"><h2>Product and shipping details</h2>
+<div class="fields">
+<div class="full"><label for="name">Product name (optional)</label><input id="name" placeholder="e.g. iPhone 17 Pro Max 512GB"></div>
+<div><label for="gbp">Purchase price (£ GBP)</label><input id="gbp" type="number" min="0" step=".01" value="1399"></div>
+<div><label for="rate">Exchange rate (K per £1)</label><input id="rate" type="number" min="0" step=".01" value="27.10"></div>
+<div><label for="actual">Actual weight (kg)</label><input id="actual" type="number" min="0" step=".01" value="1"></div>
+<div><label for="extra">Other expenses (K)</label><input id="extra" type="number" min="0" step=".01" value="0"></div>
+<div><label for="length">Length (mm)</label><input id="length" type="number" min="0" placeholder="Optional"></div>
+<div><label for="width">Width (mm)</label><input id="width" type="number" min="0" placeholder="Optional"></div>
+<div><label for="height">Height (mm)</label><input id="height" type="number" min="0" placeholder="Optional"></div>
+<div><label for="target">Desired profit (K)</label><input id="target" type="number" min="0" step="1" value="5000"></div>
+<div class="full"><label for="sell">Planned selling price (K), optional</label><input id="sell" type="number" min="0" step="1" placeholder="Leave blank to use suggested price"></div>
+</div>
+<button class="primary" id="calc">Calculate</button><button class="secondary" id="reset">Reset</button>
+<div class="formula"><b>Formula:</b> Product cost = GBP price × exchange rate. Volumetric weight = L × W × H ÷ 6,000. Chargeable weight is the higher of actual and volumetric weight. Add courier shipping and other expenses to get landed cost.</div>
+</section>
+<aside class="panel"><h2 id="resultHeading">Your price estimate</h2>
+<div class="hero"><small>RECOMMENDED SELLING PRICE</small><strong id="suggested">K43,292.90</strong><span id="basis">Landed cost plus desired profit</span></div>
+<div class="rows">
+<div class="row"><span>Product cost</span><b id="productCost">—</b></div>
+<div class="row"><span>Chargeable weight</span><b id="weight">—</b></div>
+<div class="row"><span>Estimated shipping</span><b id="shipping">—</b></div>
+<div class="row"><span>Other expenses</span><b id="other">—</b></div>
+<div class="row"><b>Total landed cost</b><b id="landed">—</b></div>
+<div class="row"><span>Price used for profit check</span><b id="used">—</b></div>
+<div class="row"><b>Estimated gross profit</b><b id="profit" class="green">—</b></div>
+</div>
+<p class="note" id="disclaimer">Shipping estimate uses the Eastwing UK-within-Lusaka tariff supplied. Confirm current rates and chargeable weight with the courier before quoting.</p>
+<button class="secondary" id="copy">Copy estimate</button>
+</aside></div>
+<p class="note">Tariff basis: Eastwing Logistics image dated 03/03/2025, UK within Lusaka: 0.5kg K270; 1kg K380; 1.5kg K490; 2kg K625; 2.5kg K765; 3kg K905; 3.5kg K1,060; 4kg K1,210; 4.5kg K1,360; 5kg K1,510; 5.5kg K1,660; 6kg K1,815; 6.5kg K1,960; 7kg K2,115; 7.5kg K2,265; 8kg K2,415; 8.5kg K2,565; 9kg K2,715; 9.5kg K2,810; 10kg K3,025. Above 10kg add K150 per additional 0.5kg. Check for tariff updates.</p>
+</main>
+<script>
+const tariff=[270,380,490,625,765,905,1060,1210,1360,1510,1660,1815,1960,2115,2265,2415,2565,2715,2810,3025];
+const $=id=>document.getElementById(id),n=id=>Math.max(0,Number($(id).value)||0);
+const fmt=x=>'K'+x.toLocaleString('en-ZM',{minimumFractionDigits:2,maximumFractionDigits:2});
+function shippingFor(kg){if(kg<=0)return 0;let half=Math.ceil((kg-1e-9)*2)/2;if(half<=10)return tariff[Math.max(0,Math.ceil(half*2)-1)];return 3025+Math.ceil((half-10)*2)*150}
+function calculate(){
+ const product=n('name')||'Product',gbp=n('gbp'),rate=n('rate'),actual=n('actual'),extra=n('extra'),target=n('target');
+ const l=n('length'),w=n('width'),h=n('height'),hasDims=l>0&&w>0&&h>0;
+ const vol=hasDims?l*w*h/6000:0,charge=Math.max(actual,vol),ship=shippingFor(charge);
+ const productCost=gbp*rate,landed=productCost+ship+extra,suggested=landed+target;
+ const planned=n('sell'),used=planned>0?planned:suggested,profit=used-landed;
+ $('suggested').textContent=fmt(suggested);$('basis').textContent='Landed cost plus desired profit';
+ $('productCost').textContent=fmt(productCost);$('weight').textContent=charge.toFixed(2)+' kg'+(hasDims?' (volumetric '+vol.toFixed(2)+' kg)':'');
+ $('shipping').textContent=fmt(ship);$('other').textContent=fmt(extra);$('landed').textContent=fmt(landed);$('used').textContent=fmt(used);
+ $('profit').textContent=fmt(profit);$('profit').className=profit>=0?'green':'red';
+ $('disclaimer').textContent='Shipping estimated for '+charge.toFixed(2)+' kg chargeable weight using the supplied Eastwing tariff. '+(hasDims?'Volumetric weight included. ':'Enter all three dimensions to compare volumetric weight. ')+'Confirm current rates, customs and final chargeable weight with the courier.';
+ window.estimate={product,productCost,charge,ship,extra,landed,suggested,used,profit};
+}
+$('calc').onclick=calculate;
+$('reset').onclick=()=>{['name','gbp','actual','length','width','height','sell'].forEach(id=>$(id).value='');$('rate').value='27.10';$('extra').value='0';$('target').value='5000';calculate()};
+$('copy').onclick=async()=>{calculate();const e=window.estimate;const s=[e.product,'Product cost: '+fmt(e.productCost),'Chargeable weight: '+e.charge.toFixed(2)+' kg','Shipping: '+fmt(e.ship),'Other expenses: '+fmt(e.extra),'Landed cost: '+fmt(e.landed),'Suggested price: '+fmt(e.suggested),'Price checked: '+fmt(e.used),'Gross profit: '+fmt(e.profit)].join('\n');try{await navigator.clipboard.writeText(s);$('copy').textContent='Copied!'}catch(_){window.prompt('Copy estimate:',s)}};
+document.querySelectorAll('input').forEach(el=>el.addEventListener('input',calculate));calculate();
+</script></body></html>
