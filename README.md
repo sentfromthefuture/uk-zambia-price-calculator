@@ -1,29 +1,29 @@
-# UK → Zambia Preorder Price Calculator
+# UK → Zambia iPhone Price Estimator
 
-A mobile-friendly static calculator for estimating UK-to-Zambia preorder prices in Zambian kwacha (ZMW).
+A mobile-friendly calculator for UK-to-Zambia iPhone preorder listings.
 
-## Features
-- GBP-to-ZMW conversion with an editable exchange rate.
-- Eastwing UK-within-Lusaka shipping estimate.
-- Actual-versus-volumetric weight comparison.
-- Landed cost, target selling price, and gross profit calculations.
-- Additional expenses and optional planned selling price.
-- No backend, dependencies, or build step.
+## Pricing logic
+1. Select a model/storage benchmark seeded from UK eBay market research.
+2. The default market-positioning factor is 8% above the benchmark, with options for 0%, 5%, or 12%.
+3. Add UK seller postage in GBP.
+4. Convert the UK purchase amount using your editable GBP/ZMW rate.
+5. Add Eastwing UK-within-Lusaka courier shipping and other ZMW expenses.
+6. Add a target gross profit between K500 and K1,000.
+7. Round the recommended listing price up to the next K50.
 
-## Run locally
-Open `index.html` in a modern browser.
+Formula:
 
-## Publish with GitHub Pages
-1. Open **Settings → Pages** in this repository.
-2. Under **Build and deployment**, choose **Deploy from a branch**.
-3. Select branch `main` and folder `/ (root)`, then save.
-4. Wait for GitHub Pages to publish the site.
+`Recommended price = roundUp50(((UK benchmark × positioning factor + UK postage) × GBP/ZMW) + courier shipping + other costs + target profit)`
 
-## Shipping tariff
-The embedded table is based on the Eastwing Logistics tariff image dated 03/03/2025, using the **UK within Lusaka** column. Confirm current rates with the courier before quoting customers.
+## Market benchmark notes
+The seeded catalogue combines:
+- Typical completed-sale benchmarks for working, unlocked iPhones aggregated from 5,323 eBay UK sales over the previous 60 days (PathAu).
+- Selected live eBay UK listing snapshots for models/storage combinations not present in that completed-sale dataset.
 
-Volumetric weight = `Length (mm) × Width (mm) × Height (mm) ÷ 6000`.
-Chargeable weight is the higher of actual and volumetric weight.
+These are starting estimates, not guarantees of a seller's asking price or the exact price you will pay. Condition, battery health, parts history, storage, seller postage, boxed status and seller reputation can materially change the price. If the exact eBay listing is available, enter its price manually. Some model/storage combinations are not covered; enter the current price yourself.
+
+## Shipping
+The embedded Eastwing table uses the UK-within-Lusaka tariff image supplied by the user, dated 03/03/2025. Confirm current rates before quoting. Volumetric weight = `Length × Width × Height ÷ 6000` (dimensions in mm). Chargeable weight is the higher of actual and volumetric weight.
 
 ## Important
-This is an estimate, not a courier or customs quotation. Add customs charges, payment conversion fees, and other expenses in the **Other expenses** field.
+Gross profit is calculated before any expenses not entered in the form. The GBP/ZMW rate should reflect the actual rate/payment conversion cost you incur, not necessarily the mid-market rate. Include customs, payment fees, local delivery and any other costs in **Other expenses**.
