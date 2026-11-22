@@ -2,13 +2,19 @@
 
 A mobile-friendly calculator for UK-to-Zambia iPhone preorder listings.
 
+## Model-specific profit targets
+- iPhone 15 and older: target gross profit K500–K1,000 (default K750).
+- iPhone 16 and newer: target gross profit K2,500–K5,000 (default K3,500).
+
+The profit slider automatically switches ranges when a model is selected. You can choose any target inside the relevant band.
+
 ## Pricing logic
 1. Select a model/storage benchmark seeded from UK eBay market research.
-2. The default market-positioning factor is 8% above the benchmark, with options for 0%, 5%, or 12%.
+2. The default market-positioning factor is 8% above the benchmark, with options for 0%, 5%, 8%, or 12%.
 3. Add UK seller postage in GBP.
 4. Convert the UK purchase amount using your editable GBP/ZMW rate.
 5. Add Eastwing UK-within-Lusaka courier shipping and other ZMW expenses.
-6. Add a target gross profit between K500 and K1,000.
+6. Add the model-specific target gross profit.
 7. Round the recommended listing price up to the next K50.
 
 Formula:
@@ -17,8 +23,8 @@ Formula:
 
 ## Market benchmark notes
 The seeded catalogue combines:
-- Typical completed-sale benchmarks for working, unlocked iPhones aggregated from 5,323 eBay UK sales over the previous 60 days (PathAu).
-- Selected live eBay UK listing snapshots for models/storage combinations not present in that completed-sale dataset.
+- Typical completed-sale benchmarks for working, unlocked iPhones aggregated from eBay UK sales over the previous 60 days.
+- Selected eBay UK listing snapshots for models/storage combinations not present in the completed-sale dataset.
 
 These are starting estimates, not guarantees of a seller's asking price or the exact price you will pay. Condition, battery health, parts history, storage, seller postage, boxed status and seller reputation can materially change the price. If the exact eBay listing is available, enter its price manually. Some model/storage combinations are not covered; enter the current price yourself.
 
