@@ -1,100 +1,155 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0b0e14">
 <title>UK to Zambia iPhone Price Estimator</title>
-<style>
-:root{color-scheme:dark;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#0b0e14;color:#f4f6fb}*{box-sizing:border-box}body{margin:0;padding:18px;background:linear-gradient(145deg,#090b10,#171c27);min-height:100vh}main{max-width:980px;margin:auto}.tag{color:#ff6262;font-size:.78rem;font-weight:800;letter-spacing:.14em}h1{font-size:clamp(1.8rem,5vw,2.5rem);margin:.3rem 0}.sub,.note{color:#aab3c2}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin-top:20px}.panel{background:#151b26;border:1px solid #303949;border-radius:18px;padding:19px}h2{font-size:1.08rem;margin:0 0 15px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;color:#cbd2dd;font-size:.83rem;margin-bottom:6px}input,select{width:100%;padding:12px;border-radius:10px;border:1px solid #3a4658;background:#0b1018;color:white;font-size:1rem}input:focus,select:focus{outline:2px solid #e9343c;border-color:transparent}.full{grid-column:1/-1}.hero{background:linear-gradient(130deg,#e52a32,#8f101b);border-radius:14px;padding:18px;margin-bottom:16px}.hero small{font-weight:800;letter-spacing:.08em}.hero strong{display:block;font-size:clamp(2rem,7vw,3rem);margin:5px 0}.rows{display:grid;gap:10px}.row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #303949;padding-bottom:9px}.row span{color:#aab3c2}.row b{text-align:right;font-variant-numeric:tabular-nums}.green{color:#4cdda0!important}.red{color:#ff7d82!important}button{border:0;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer;margin:14px 8px 0 0}.primary{background:#e52a32;color:white}.secondary{background:#303949;color:white}.note{font-size:.78rem;line-height:1.5;margin-top:15px}.formula{background:#0e141e;border:1px solid #303949;border-radius:12px;padding:13px;margin-top:15px;font-size:.82rem;color:#cbd2dd}.range{display:flex;justify-content:space-between;color:#cbd2dd;font-size:.82rem}.source{font-size:.76rem;color:#9ba8ba}.pill{display:inline-block;border:1px solid #475569;border-radius:20px;padding:3px 8px;font-size:.72rem;color:#cbd2dd;margin:3px 4px 3px 0}@media(max-width:760px){body{padding:12px}.grid{grid-template-columns:1fr}}@media(max-width:420px){.fields{grid-template-columns:1fr}}
+<link rel="stylesheet" href="css/style.css?v=2026-11-22">
+</head>
+<body>
+<main>
+  <header>
+    <div class="tag">PREORDER BUSINESS TOOL</div>
+    <h1>UK → Zambia iPhone Price Estimator</h1>
+    <p class="sub">Pick the phone, enter the UK eBay price, and get your landed cost, recommended selling price and profit.</p>
+  </header>
 
-/* Usability improvements */
-label{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-weight:600}
-.required{color:#ff777d;font-size:.7rem;font-weight:800;letter-spacing:.04em}
-.hint{display:inline-block;position:relative;font-size:inherit}
-.hint summary{list-style:none;display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;border:1px solid #8290a4;border-radius:50%;color:#cbd5e1;font-size:12px;font-weight:800;cursor:pointer;user-select:none}
-.hint summary::-webkit-details-marker{display:none}
-.hint[open] .hint-pop{display:block}
-.hint-pop{position:absolute;z-index:20;left:0;top:25px;width:min(260px,75vw);padding:10px 12px;border:1px solid #59677c;border-radius:10px;background:#222c3b;color:#f4f6fb;font-size:.78rem;font-weight:400;line-height:1.45;box-shadow:0 8px 25px #0009}
-.field-important input,.field-important select{border:2px solid #e52a32;background:#111824}
-.field-important input:focus,.field-important select:focus{outline:2px solid #ff777d}
-#status{padding:10px 12px;border-radius:10px;background:#202938;border:1px solid #39485c}
-#status.error{color:#ffb5b8;border-color:#e52a32;background:#351b22}
-#status.success{color:#78e4b4;border-color:#287a58}
-@media(max-width:420px){.hint-pop{left:auto;right:0}}
+  <div id="fatal" class="banner error" role="alert" hidden></div>
+  <noscript><div class="banner error">This calculator needs JavaScript. Please enable it and reload the page.</div></noscript>
 
-</style></head><body><main>
-<div class="tag">PREORDER BUSINESS TOOL</div><h1>UK → Zambia iPhone Price Estimator</h1><p class="sub">Choose an iPhone model, start from UK eBay sold-price benchmarks, then calculate your landed cost and selling price.</p>
-<div class="grid"><section class="panel"><h2>1. Select the phone</h2><div class="fields">
-<div class="full field-important"><label for="model">iPhone model and storage <span class="required">IMPORTANT</span><details class="hint"><summary aria-label="Information about model" title="More information">i</summary><div class="hint-pop">Choose the exact iPhone model and storage. This fills the UK benchmark automatically. If your exact version is missing, leave this blank and enter its eBay price below.</div></details></label><select id="model"><option value="">Choose a model…</option><option value="0">iPhone 18 Pro · 256GB — £996</option><option value="1">iPhone 18 Pro Max · 256GB — £1150</option><option value="2">iPhone 18 Pro Max · 512GB — £1330</option><option value="3">iPhone 17 · 256GB — £598</option><option value="4">iPhone 17 Pro · 256GB — £752</option><option value="5">iPhone 17 Pro · 512GB — £823</option><option value="6">iPhone 17 Pro · 1TB — £910</option><option value="7">iPhone 17 Pro Max · 256GB — £822</option><option value="8">iPhone 17 Pro Max · 512GB — £876</option><option value="9">iPhone 17 Pro Max · 1TB — £964</option><option value="10">iPhone 17 Pro Max · 2TB — £1128</option><option value="11">iPhone 17e · 256GB — £493</option><option value="12">iPhone 16 · 128GB — £385</option><option value="13">iPhone 16 · 256GB — £433</option><option value="14">iPhone 16 Plus · 128GB — £435</option><option value="15">iPhone 16 Plus · 256GB — £513</option><option value="16">iPhone 16 Pro · 128GB — £495</option><option value="17">iPhone 16 Pro Max · 256GB — £565</option><option value="18">iPhone 15 · 128GB — £360</option><option value="19">iPhone 15 Pro Max · 256GB — £450</option><option value="20">iPhone 14 · 128GB — £260</option><option value="21">iPhone 14 Pro Max · 256GB — £430</option><option value="22">iPhone 13 · 256GB — £165</option><option value="23">iPhone 13 Mini · 128GB — £141</option><option value="24">iPhone 13 Pro · 128GB — £200</option><option value="25">iPhone 13 Pro · 256GB — £223</option><option value="26">iPhone 13 Pro Max · 128GB — £232</option><option value="27">iPhone 13 Pro Max · 256GB — £261</option><option value="28">iPhone 13 Pro Max · 512GB — £286</option><option value="29">iPhone 13 Pro Max · 1TB — £310</option><option value="30">iPhone 12 · 64GB — £96</option><option value="31">iPhone 12 · 128GB — £109</option><option value="32">iPhone 12 · 256GB — £126</option><option value="33">iPhone 12 Mini · 64GB — £90</option><option value="34">iPhone 12 Mini · 128GB — £95</option><option value="35">iPhone 12 Pro · 128GB — £136</option><option value="36">iPhone 12 Pro · 256GB — £151</option><option value="37">iPhone 12 Pro Max · 128GB — £172</option><option value="38">iPhone 12 Pro Max · 256GB — £208</option><option value="39">iPhone 12 Pro Max · 512GB — £215</option><option value="40">iPhone 11 · 64GB — £79</option><option value="41">iPhone 11 · 128GB — £89</option><option value="42">iPhone 11 · 256GB — £105</option><option value="43">iPhone 11 Pro · 64GB — £89</option><option value="44">iPhone 11 Pro · 256GB — £124</option><option value="45">iPhone 11 Pro Max · 64GB — £105</option><option value="46">iPhone 11 Pro Max · 256GB — £157</option><option value="47">iPhone XS Max · 64GB — £79</option><option value="48">iPhone XS Max · 256GB — £91</option><option value="49">iPhone XS · 64GB — £61</option><option value="50">iPhone XS · 256GB — £71</option><option value="51">iPhone XR · 64GB — £60</option><option value="52">iPhone XR · 128GB — £70</option><option value="53">iPhone X · 64GB — £58</option><option value="54">iPhone X · 256GB — £74</option><option value="55">iPhone SE 2022 · 64GB — £70</option><option value="56">iPhone SE 2022 · 128GB — £85</option><option value="57">iPhone SE 2020 · 64GB — £50</option><option value="58">iPhone SE 2020 · 128GB — £51</option><option value="59">iPhone 8 · 64GB — £45</option><option value="60">iPhone 8 Plus · 64GB — £49</option><option value="61">iPhone 8 Plus · 256GB — £73</option><option value="62">iPhone 7 Plus · 128GB — £48</option><option value="63">iPhone 5 · 16GB — £54</option></select></div>
-<div class="field-important"><label for="market">UK eBay benchmark (£) <span class="required">IMPORTANT</span><details class="hint"><summary aria-label="Information about market" title="More information">i</summary><div class="hint-pop">Required unless a model selection fills it for you. Enter the actual UK eBay item price in pounds (£), before UK seller postage.</div></details></label><input id="market" type="number" min="0" step=".01" placeholder="Choose model or enter manually"></div>
-<div><label for="ukPostage">UK seller postage (£)<details class="hint"><summary aria-label="Information about ukPostage" title="More information">i</summary><div class="hint-pop">Enter the seller's UK delivery charge in pounds. Use 0 if collection or free delivery.</div></details></label><input id="ukPostage" type="number" min="0" step=".01" value="0"></div>
-<div><label for="premium">Market positioning<details class="hint"><summary aria-label="Information about premium" title="More information">i</summary><div class="hint-pop">Adjusts the benchmark to position your listing above typical market pricing. Use the actual listing price instead if you already have one.</div></details></label><select id="premium"><option value="1">Typical sold price</option><option value="1.05">5% above typical</option><option value="1.08" selected>8% above typical</option><option value="1.12">12% above typical</option></select></div>
-<div class="field-important"><label for="rate">Exchange rate (K per £1) <span class="required">IMPORTANT</span><details class="hint"><summary aria-label="Information about rate" title="More information">i</summary><div class="hint-pop">Required. Enter the real GBP-to-ZMW rate you will pay, including conversion spread or fees where possible.</div></details></label><input id="rate" type="number" min="0" step=".01" value="26.95"></div>
-<div class="field-important"><label for="actual">Actual shipping weight (kg) <span class="required">IMPORTANT</span><details class="hint"><summary aria-label="Information about actual" title="More information">i</summary><div class="hint-pop">Required. Enter the parcel's physical weight in kilograms. Eastwing charges using whichever is higher: actual or volumetric weight.</div></details></label><input id="actual" type="number" min="0" step=".01" value="1"></div>
-<div><label for="extra">Other expenses (K)<details class="hint"><summary aria-label="Information about extra" title="More information">i</summary><div class="hint-pop">Optional ZMW costs such as customs, payment fees, local delivery, packaging or other expenses.</div></details></label><input id="extra" type="number" min="0" step=".01" value="0"></div>
-<div><label for="length">Length (mm)<details class="hint"><summary aria-label="Information about length" title="More information">i</summary><div class="hint-pop">Optional parcel length in millimetres. Enter all three dimensions to calculate volumetric weight.</div></details></label><input id="length" type="number" min="0" placeholder="Optional"></div>
-<div><label for="width">Width (mm)<details class="hint"><summary aria-label="Information about width" title="More information">i</summary><div class="hint-pop">Optional parcel width in millimetres. Enter all three dimensions to calculate volumetric weight.</div></details></label><input id="width" type="number" min="0" placeholder="Optional"></div>
-<div><label for="height">Height (mm)<details class="hint"><summary aria-label="Information about height" title="More information">i</summary><div class="hint-pop">Optional parcel height in millimetres. Enter all three dimensions to calculate volumetric weight.</div></details></label><input id="height" type="number" min="0" placeholder="Optional"></div>
-<div class="full field-important"><div class="range"><label for="profitTarget">Target gross profit <span class="required">IMPORTANT</span><details class="hint"><summary aria-label="Information about profitTarget" title="More information">i</summary><div class="hint-pop">Choose your desired gross profit. Older iPhones use K500–K1,000; iPhone 16 and newer use K2,500–K5,000.</div></details></label><b id="profitLabel">K750</b></div><input id="profitTarget" type="range" min="500" max="1000" step="50" value="750"><div class="range"><span id="profitMin">K500</span><span id="profitMax">K1,000</span></div></div>
-<div class="full"><label for="manualSell">Your own selling price (K), optional<details class="hint"><summary aria-label="Information about manualSell" title="More information">i</summary><div class="hint-pop">Optional. Enter the price you actually intend to charge. The calculator compares it with your landed cost and target profit. Leave blank to use the recommended price.</div></details></label><input id="manualSell" type="number" min="0" step="50" placeholder="Leave blank to use recommended price"></div>
-</div>
-<button class="primary" id="calc">Calculate price</button><button class="secondary" id="reset">Reset</button>
-<div class="formula"><b>Pricing formula</b><br>UK buy price × positioning factor × GBP/ZMW rate + courier shipping + other costs = landed cost.<br>Recommended listing price = landed cost + the model-specific gross profit target, rounded up to the next K50.</div>
-<p class="source" id="modelInfo">Benchmarks are typical completed-sale prices for working, unlocked phones, not guaranteed purchase prices. Check the actual listing, condition, battery and seller before buying.</p></section>
-<aside class="panel"><h2>Your recommended listing</h2><div class="hero"><small>RECOMMENDED SELLING PRICE</small><strong id="suggested">—</strong><span id="basis">Select a model or enter a UK price</span></div>
-<div class="rows"><div class="row"><span>UK price after positioning</span><b id="ukPrice">—</b></div><div class="row"><span>Converted product cost</span><b id="productCost">—</b></div><div class="row"><span>Chargeable weight</span><b id="weight">—</b></div><div class="row"><span>Estimated Eastwing shipping</span><b id="shipping">—</b></div><div class="row"><span>Other expenses</span><b id="other">—</b></div><div class="row"><b>Total landed cost</b><b id="landed">—</b></div><div class="row"><span>Price used for profit check</span><b id="used">—</b></div><div class="row"><b>Estimated gross profit</b><b id="profit" class="green">—</b></div></div>
-<p class="note" id="status" role="status" aria-live="polite">Choose a model or enter a UK eBay price. Profit shown is before any costs not entered above.</p><button class="secondary" id="copy">Copy estimate</button></aside></div>
-<section class="panel" style="margin-top:16px"><h2>How to use the eBay benchmark</h2><p class="note">The model selector is seeded with UK eBay completed-sale benchmarks. The default positioning adds 8% to the typical sold price to target the middle-to-upper end rather than the cheapest listings. You can change the percentage or overwrite the UK price with the exact listing you find. The estimator then adds shipping and your chosen profit.</p><span class="pill">Unlocked</span><span class="pill">Working condition benchmark</span><span class="pill">Editable UK price</span><span class="pill">Older models: K500–K1,000 profit</span><span class="pill">iPhone 16 and newer: K2,500–K5,000 profit</span>
-<p class="note">Shipping tariff is the Eastwing UK-within-Lusaka schedule supplied by you (dated 03/03/2025). Confirm current courier charges. Volumetric weight = L × W × H ÷ 6,000; chargeable weight is the higher of actual and volumetric. This tariff table is an estimate and may have changed.</p></section>
+  <div class="layout">
+    <form id="calcForm" novalidate autocomplete="off">
+
+      <section class="panel">
+        <h2>1. Phone and UK price</h2>
+        <div class="fields">
+          <div class="field key full" data-field="model">
+            <div class="label-row"><label for="model">iPhone model and storage</label><span class="badge req">Required</span></div>
+            <select id="model" aria-describedby="modelInfo err-model"><option value="">Loading models…</option></select>
+            <p class="field-note" id="modelInfo"></p>
+            <p class="error-msg" id="err-model" role="alert" hidden></p>
+          </div>
+
+          <div class="field key full" data-field="price">
+            <div class="label-row"><label for="price">UK purchase price (£)</label><span class="badge req">Required</span></div>
+            <input id="price" inputmode="decimal" placeholder="e.g. 450.00" aria-describedby="priceTag err-price">
+            <p class="field-note"><span id="priceTag"></span> <button type="button" id="restoreBench" class="linkbtn" hidden>Use benchmark again</button></p>
+            <p class="error-msg" id="err-price" role="alert" hidden></p>
+          </div>
+
+          <div class="field" data-field="postage">
+            <div class="label-row"><label for="postage">UK seller postage (£)</label><span class="badge opt">Optional</span></div>
+            <input id="postage" inputmode="decimal" placeholder="0" aria-describedby="err-postage">
+            <p class="error-msg" id="err-postage" role="alert" hidden></p>
+          </div>
+
+          <div class="field" data-field="positioning">
+            <div class="label-row"><label for="positioning">Benchmark uplift</label><span class="badge opt">Optional</span></div>
+            <select id="positioning" aria-describedby="upliftNote"></select>
+            <p class="field-note" id="upliftNote"></p>
+          </div>
+
+          <div class="field key full" data-field="rate">
+            <div class="label-row"><label for="rate">Exchange rate (K per £1)</label><span class="badge req">Required</span></div>
+            <input id="rate" inputmode="decimal" placeholder="e.g. 26.95" aria-describedby="err-rate">
+            <p class="error-msg" id="err-rate" role="alert" hidden></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>2. Parcel weight (Eastwing)</h2>
+        <div class="fields">
+          <div class="field key full" data-field="actual">
+            <div class="label-row"><label for="actual">Actual shipping weight (kg)</label><span class="badge req">Required</span></div>
+            <input id="actual" inputmode="decimal" placeholder="e.g. 1" aria-describedby="err-actual">
+            <p class="error-msg" id="err-actual" role="alert" hidden></p>
+          </div>
+
+          <div class="field full" data-field="dims">
+            <div class="label-row"><span class="label-text" id="dimsLabel">Parcel size (cm)</span><span class="badge opt">Optional</span></div>
+            <div class="dims">
+              <div><label class="sub-label" for="length">Length</label><input id="length" inputmode="decimal" placeholder="cm" aria-describedby="err-dims"></div>
+              <div><label class="sub-label" for="width">Width</label><input id="width" inputmode="decimal" placeholder="cm" aria-describedby="err-dims"></div>
+              <div><label class="sub-label" for="height">Height</label><input id="height" inputmode="decimal" placeholder="cm" aria-describedby="err-dims"></div>
+            </div>
+            <p class="field-note" id="volPreview"></p>
+            <p class="error-msg" id="err-dims" role="alert" hidden></p>
+          </div>
+        </div>
+        <p class="field-note" id="tariffNote"></p>
+      </section>
+
+      <section class="panel">
+        <h2>3. Costs and profit</h2>
+        <div class="fields">
+          <div class="field full" data-field="other">
+            <div class="label-row"><label for="other">Other expenses (K)</label><span class="badge opt">Optional</span></div>
+            <input id="other" inputmode="decimal" placeholder="0" aria-describedby="err-other">
+            <p class="error-msg" id="err-other" role="alert" hidden></p>
+          </div>
+
+          <div class="field key full" data-field="profit">
+            <div class="label-row"><label for="profit">Target profit (K)</label><span class="badge req">Required</span></div>
+            <input id="profit" inputmode="numeric" aria-describedby="profitBand err-profit">
+            <input id="profitRange" type="range" aria-label="Target profit slider">
+            <div class="range-ends"><span id="profitMin"></span><span id="profitBand"></span><span id="profitMax"></span></div>
+            <p class="error-msg" id="err-profit" role="alert" hidden></p>
+          </div>
+
+          <div class="field full" data-field="sell">
+            <div class="label-row"><label for="sell">Your own selling price (K)</label><span class="badge opt">Optional</span></div>
+            <input id="sell" inputmode="decimal" placeholder="Leave blank to use the recommended price" aria-describedby="err-sell">
+            <p class="error-msg" id="err-sell" role="alert" hidden></p>
+          </div>
+        </div>
+      </section>
+
+      <div id="formBanner" class="banner error" role="alert" hidden></div>
+      <div class="actions">
+        <button type="submit" id="calc" class="primary">Calculate price</button>
+        <button type="button" id="reset" class="secondary">Reset</button>
+      </div>
+    </form>
+
+    <aside class="panel results" id="results" tabindex="-1" aria-label="Results">
+      <h2>Your recommended listing</h2>
+      <div id="resBanner" class="banner" role="status" hidden></div>
+      <div class="hero">
+        <small>RECOMMENDED SELLING PRICE</small>
+        <strong id="r-recommended">—</strong>
+        <span id="r-basis">Fill in the form and press Calculate price.</span>
+        <button type="button" id="copyPrice" class="hero-btn" disabled>Copy price</button>
+      </div>
+      <div class="rows">
+        <div class="row"><div><span>UK purchase price</span><small id="r-uk-sub"></small></div><b id="r-uk">—</b></div>
+        <div class="row"><div><span>UK postage</span></div><b id="r-post">—</b></div>
+        <div class="row"><div><span>Exchange conversion</span><small id="r-conv-sub"></small></div><b id="r-conv">—</b></div>
+        <div class="row"><div><span>Eastwing shipping</span><small id="r-ship-sub"></small></div><b id="r-ship">—</b></div>
+        <div class="row"><div><span>Other expenses</span></div><b id="r-other">—</b></div>
+        <div class="row strong"><div><span>Total landed cost</span></div><b id="r-landed">—</b></div>
+        <div class="row"><div><span>Target profit</span></div><b id="r-target">—</b></div>
+        <div class="row strong"><div><span>Recommended selling price</span><small id="r-rec-sub"></small></div><b id="r-rec">—</b></div>
+        <div class="row strong"><div><span>Actual expected profit</span><small id="r-profit-sub"></small></div><b id="r-profit">—</b></div>
+        <div class="row" id="r-own-row" hidden><div><span id="r-own-label">Profit at your price</span></div><b id="r-own">—</b></div>
+      </div>
+      <button type="button" id="copyAll" class="secondary" disabled>Copy full breakdown</button>
+    </aside>
+  </div>
+
+  <section class="panel notes">
+    <h2>How the price is worked out</h2>
+    <p class="note"><b>Landed cost</b> = (UK price + UK postage) × exchange rate + Eastwing shipping + other expenses.<br>
+    <b>Recommended price</b> = landed cost + target profit, rounded <u>up</u> to the next K50. Expected profit is that rounded price minus landed cost.</p>
+    <p class="note">The auto-filled UK price is a benchmark (typical eBay UK sold price for a working, unlocked phone), not a guaranteed price — check the real listing, condition and battery, and type the actual price over it. The benchmark uplift only applies to the benchmark, never to a price you type.</p>
+    <p class="note" id="tariffNote2"></p>
+  </section>
 </main>
-<script>
-const models=[
-["iPhone 18 Pro","256GB",996,42],["iPhone 18 Pro Max","256GB",1150,29],["iPhone 18 Pro Max","512GB",1330,17],
-["iPhone 17","256GB",598,104],["iPhone 17 Pro","256GB",752,226],["iPhone 17 Pro","512GB",823,29],["iPhone 17 Pro","1TB",910,9],["iPhone 17 Pro Max","256GB",822,298],["iPhone 17 Pro Max","512GB",876,77],["iPhone 17 Pro Max","1TB",964,36],["iPhone 17 Pro Max","2TB",1128,18],["iPhone 17e","256GB",493,22],
-["iPhone 16","128GB",385,124],["iPhone 16","256GB",433,20],["iPhone 16 Plus","128GB",435,53],["iPhone 16 Plus","256GB",513,18],["iPhone 16 Pro","128GB",495,0],["iPhone 16 Pro Max","256GB",565,0],
-["iPhone 15","128GB",360,110],["iPhone 15 Pro Max","256GB",450,0],
-["iPhone 14","128GB",260,357],["iPhone 14 Pro Max","256GB",430,0],
-["iPhone 13","256GB",165,21],["iPhone 13 Mini","128GB",141,74],["iPhone 13 Pro","128GB",200,70],["iPhone 13 Pro","256GB",223,36],["iPhone 13 Pro Max","128GB",232,80],["iPhone 13 Pro Max","256GB",261,57],["iPhone 13 Pro Max","512GB",286,10],["iPhone 13 Pro Max","1TB",310,12],
-["iPhone 12","64GB",96,121],["iPhone 12","128GB",109,42],["iPhone 12","256GB",126,13],["iPhone 12 Mini","64GB",90,74],["iPhone 12 Mini","128GB",95,40],["iPhone 12 Pro","128GB",136,58],["iPhone 12 Pro","256GB",151,28],["iPhone 12 Pro Max","128GB",172,55],["iPhone 12 Pro Max","256GB",208,36],["iPhone 12 Pro Max","512GB",215,17],
-["iPhone 11","64GB",79,218],["iPhone 11","128GB",89,59],["iPhone 11","256GB",105,9],["iPhone 11 Pro","64GB",89,35],["iPhone 11 Pro","256GB",124,26],["iPhone 11 Pro Max","64GB",105,23],["iPhone 11 Pro Max","256GB",157,25],
-["iPhone XS Max","64GB",79,11],["iPhone XS Max","256GB",91,14],["iPhone XS","64GB",61,26],["iPhone XS","256GB",71,11],["iPhone XR","64GB",60,119],["iPhone XR","128GB",70,32],["iPhone X","64GB",58,53],["iPhone X","256GB",74,12],["iPhone SE 2022","64GB",70,48],["iPhone SE 2022","128GB",85,19],["iPhone SE 2020","64GB",50,64],["iPhone SE 2020","128GB",51,16],["iPhone 8","64GB",45,34],["iPhone 8 Plus","64GB",49,28],["iPhone 8 Plus","256GB",73,8],["iPhone 7 Plus","128GB",48,9],["iPhone 5","16GB",54,8]
-];
-const tariff=[270,380,490,625,765,905,1060,1210,1360,1510,1660,1815,1960,2115,2265,2415,2565,2715,2810,3025];
-const $=id=>document.getElementById(id),n=id=>Math.max(0,Number($(id).value)||0),fmt=x=>'K'+x.toLocaleString('en-ZM',{minimumFractionDigits:0,maximumFractionDigits:0});
-const select=$('model');
-function shippingFor(kg){if(kg<=0)return 0;let half=Math.ceil((kg-1e-9)*2)/2;if(half<=10)return tariff[Math.max(0,Math.ceil(half*2)-1)];return 3025+Math.ceil((half-10)*2)*150}
-function setProfitBand(isNewer,resetValue=false){
- const slider=$('profitTarget');
- const min=isNewer?2500:500,max=isNewer?5000:1000,step=isNewer?250:50,defaultValue=isNewer?3500:750;
- slider.min=min;slider.max=max;slider.step=step;
- if(resetValue||Number(slider.value)<min||Number(slider.value)>max)slider.value=defaultValue;
- $('profitMin').textContent=fmt(min);$('profitMax').textContent=fmt(max);
- $('profitLabel').textContent=fmt(Number(slider.value));
-}
-function updateFromModel(){if(select.value==='')return;const m=models[Number(select.value)];const generation=Number((m[0].match(/iPhone (\d+)/)||[])[1]||0);setProfitBand(generation>=16);if(m[2])$('market').value=m[2];else $('market').value='';$('modelInfo').textContent=m[2]?'Indicative UK eBay benchmark for '+m[0]+' '+m[1]+'. It is based on recent completed-sale data where available and current eBay listing snapshots for selected newer Pro models. Replace it with the exact listing price you find.':'No reliable model/storage benchmark captured for this configuration. Enter the actual eBay UK price manually.';calculate()}
-function calculate(){
- const m=select.value===''?null:models[Number(select.value)],base=n('market'),ukPostage=n('ukPostage'),factor=n('premium')||1,rate=n('rate'),actual=n('actual'),extra=n('extra'),target=n('profitTarget');
- const l=n('length'),w=n('width'),h=n('height'),hasDims=l>0&&w>0&&h>0,vol=hasDims?l*w*h/6000:0,charge=Math.max(actual,vol),ship=shippingFor(charge);
- const uk=base*factor+ukPostage,productCost=uk*rate,landed=productCost+ship+extra,raw=landed+target,suggested=Math.ceil(raw/50)*50;
- const planned=n('manualSell'),used=planned>0?planned:suggested,profit=used-landed;
- $('profitLabel').textContent=fmt(target);$('suggested').textContent=base?fmt(suggested):'—';$('basis').textContent=base?'Landed cost + '+fmt(target)+' target profit':'Select a model or enter a UK price';
- $('ukPrice').textContent=base?'£'+uk.toFixed(2):'—';$('productCost').textContent=base?fmt(productCost):'—';$('weight').textContent=charge.toFixed(2)+' kg'+(hasDims?' (volumetric '+vol.toFixed(2)+' kg)':'');$('shipping').textContent=fmt(ship);$('other').textContent=fmt(extra);$('landed').textContent=base?fmt(landed):'—';$('used').textContent=base?fmt(used):'—';$('profit').textContent=base?fmt(profit):'—';$('profit').className=profit>=0?'green':'red';
- $('status').textContent=!base?'Choose a model or type a UK eBay price.':(profit>=Number($('profitTarget').min)&&profit<=Number($('profitTarget').max)?'Within your model-specific target profit range.':profit<Number($('profitTarget').min)?'Below your minimum target. Increase selling price or reduce costs.':'Above your target range. You can lower the manual selling price if the market supports it.');
- window.estimate={model:m?m[0]+' '+m[1]:'Custom iPhone',ukPrice:uk,productCost,charge,ship,extra,landed,suggested,used,profit};
-}
-select.addEventListener('change',()=>{updateFromModel();$('status').className='note';});$('profitTarget').addEventListener('input',()=>{$('profitLabel').textContent=fmt(n('profitTarget'));});['market','ukPostage','premium','rate','actual','extra','length','width','height','manualSell','profitTarget'].forEach(id=>$(id).addEventListener('input',()=>{calculate();$('status').className='note';}));
-function runCalculation(){
- const errors=[];
- const price=n('market'),rate=n('rate'),weight=n('actual');
- if(price<=0)errors.push('Choose an iPhone model or enter a UK eBay benchmark price.');
- if(rate<=0)errors.push('Enter a valid GBP/ZMW exchange rate greater than zero.');
- if(weight<=0)errors.push('Enter the parcel actual weight in kg.');
- const dims=[n('length'),n('width'),n('height')],filled=dims.filter(v=>v>0).length;
- if(filled>0&&filled<3)errors.push('Enter all three parcel dimensions, or clear all three.');
- if(errors.length){
-  $('status').className='note error';$('status').textContent=errors.join(' ');
-  const focusId=price<=0?'market':rate<=0?'rate':weight<=0?'actual':'length';
-  $(focusId).focus();return;
- }
- calculate();$('status').className='note success';
-}
-$('calc').onclick=runCalculation;$('copy').onclick=async()=>{calculate();const e=window.estimate,s=[e.model,'UK price including seller postage after positioning: £'+e.ukPrice.toFixed(2),'Converted product cost: '+fmt(e.productCost),'Chargeable weight: '+e.charge.toFixed(2)+'kg','Shipping: '+fmt(e.ship),'Other expenses: '+fmt(e.extra),'Landed cost: '+fmt(e.landed),'Suggested price: '+fmt(e.suggested),'Selling price used: '+fmt(e.used),'Gross profit: '+fmt(e.profit)].join('\n');try{await navigator.clipboard.writeText(s);$('copy').textContent='Copied!'}catch(_){window.prompt('Copy estimate:',s)}};
-$('reset').onclick=()=>{select.value='';['market','length','width','height','manualSell'].forEach(id=>$(id).value='');$('ukPostage').value='0';$('premium').value='1.08';$('rate').value='26.95';$('actual').value='1';$('extra').value='0';$('profitTarget').value='750';setProfitBand(false,true);$('modelInfo').textContent='Benchmarks are typical completed-sale prices for working, unlocked phones, not guaranteed purchase prices. Check the actual listing, condition, battery and seller before buying.';calculate()}calculate();
-</script></body></html>
+<script src="js/config.js?v=2026-11-22"></script>
+<script src="js/catalogue.js?v=2026-11-22"></script>
+<script src="js/calc.js?v=2026-11-22"></script>
+<script src="js/app.js?v=2026-11-22"></script>
+</body>
+</html>
