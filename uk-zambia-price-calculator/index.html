@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0b0e14">
+<title>UK to Zambia iPhone Price Estimator</title>
+<link rel="stylesheet" href="css/style.css?v=2026-11-22">
+</head>
+<body>
+<main>
+  <header>
+    <div class="tag">PREORDER BUSINESS TOOL</div>
+    <h1>UK → Zambia iPhone Price Estimator</h1>
+    <p class="sub">Pick the phone, enter the UK eBay price, and get your landed cost, recommended selling price and profit.</p>
+  </header>
+
+  <div id="fatal" class="banner error" role="alert" hidden></div>
+  <noscript><div class="banner error">This calculator needs JavaScript. Please enable it and reload the page.</div></noscript>
+
+  <div class="layout">
+    <form id="calcForm" novalidate autocomplete="off">
+
+      <section class="panel">
+        <h2>1. Phone and UK price</h2>
+        <div class="fields">
+          <div class="field key full" data-field="model">
+            <div class="label-row"><label for="model">iPhone model and storage</label><span class="badge req">Required</span></div>
+            <select id="model" aria-describedby="modelInfo err-model"><option value="">Loading models…</option></select>
+            <p class="field-note" id="modelInfo"></p>
+            <p class="error-msg" id="err-model" role="alert" hidden></p>
+          </div>
+
+          <div class="field key full" data-field="price">
+            <div class="label-row"><label for="price">UK purchase price (£)</label><span class="badge req">Required</span></div>
+            <input id="price" inputmode="decimal" placeholder="e.g. 450.00" aria-describedby="priceTag err-price">
+            <p class="field-note"><span id="priceTag"></span> <button type="button" id="restoreBench" class="linkbtn" hidden>Use benchmark again</button></p>
+            <p class="error-msg" id="err-price" role="alert" hidden></p>
+          </div>
+
+          <div class="field" data-field="postage">
+            <div class="label-row"><label for="postage">UK seller postage (£)</label><span class="badge opt">Optional</span></div>
+            <input id="postage" inputmode="decimal" placeholder="0" aria-describedby="err-postage">
+            <p class="error-msg" id="err-postage" role="alert" hidden></p>
+          </div>
+
+          <div class="field" data-field="positioning">
+            <div class="label-row"><label for="positioning">Benchmark uplift</label><span class="badge opt">Optional</span></div>
+            <select id="positioning" aria-describedby="upliftNote"></select>
+            <p class="field-note" id="upliftNote"></p>
+          </div>
+
+          <div class="field key full" data-field="rate">
+            <div class="label-row"><label for="rate">Exchange rate (K per £1)</label><span class="badge req">Required</span></div>
+            <input id="rate" inputmode="decimal" placeholder="e.g. 26.95" aria-describedby="err-rate">
+            <p class="error-msg" id="err-rate" role="alert" hidden></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>2. Parcel weight (Eastwing)</h2>
+        <div class="fields">
+          <div class="field key full" data-field="actual">
+            <div class="label-row"><label for="actual">Actual shipping weight (kg)</label><span class="badge req">Required</span></div>
+            <input id="actual" inputmode="decimal" placeholder="e.g. 1" aria-describedby="err-actual">
+            <p class="error-msg" id="err-actual" role="alert" hidden></p>
+          </div>
+
+          <div class="field full" data-field="dims">
+            <div class="label-row"><span class="label-text" id="dimsLabel">Parcel size (cm)</span><span class="badge opt">Optional</span></div>
+            <div class="dims">
+              <div><label class="sub-label" for="length">Length</label><input id="length" inputmode="decimal" placeholder="cm" aria-describedby="err-dims"></div>
+              <div><label class="sub-label" for="width">Width</label><input id="width" inputmode="decimal" placeholder="cm" aria-describedby="err-dims"></div>
+              <div><label class="sub-label" for="height">Height</label><input id="height" inputmode="decimal" placeholder="cm" aria-describedby="err-dims"></div>
+            </div>
+            <p class="field-note" id="volPreview"></p>
+            <p class="error-msg" id="err-dims" role="alert" hidden></p>
+          </div>
+        </div>
+        <p class="field-note" id="tariffNote"></p>
+      </section>
+
+      <section class="panel">
+        <h2>3. Costs and profit</h2>
+        <div class="fields">
+          <div class="field full" data-field="other">
+            <div class="label-row"><label for="other">Other expenses (K)</label><span class="badge opt">Optional</span></div>
+            <input id="other" inputmode="decimal" placeholder="0" aria-describedby="err-other">
+            <p class="error-msg" id="err-other" role="alert" hidden></p>
+          </div>
+
+          <div class="field key full" data-field="profit">
+            <div class="label-row"><label for="profit">Target profit (K)</label><span class="badge req">Required</span></div>
+            <input id="profit" inputmode="numeric" aria-describedby="profitBand err-profit">
+            <input id="profitRange" type="range" aria-label="Target profit slider">
+            <div class="range-ends"><span id="profitMin"></span><span id="profitBand"></span><span id="profitMax"></span></div>
+            <p class="error-msg" id="err-profit" role="alert" hidden></p>
+          </div>
+
+          <div class="field full" data-field="sell">
+            <div class="label-row"><label for="sell">Your own selling price (K)</label><span class="badge opt">Optional</span></div>
+            <input id="sell" inputmode="decimal" placeholder="Leave blank to use the recommended price" aria-describedby="err-sell">
+            <p class="error-msg" id="err-sell" role="alert" hidden></p>
+          </div>
+        </div>
+      </section>
+
+      <div id="formBanner" class="banner error" role="alert" hidden></div>
+      <div class="actions">
+        <button type="submit" id="calc" class="primary">Calculate price</button>
+        <button type="button" id="reset" class="secondary">Reset</button>
+      </div>
+    </form>
+
+    <aside class="panel results" id="results" tabindex="-1" aria-label="Results">
+      <h2>Your recommended listing</h2>
+      <div id="resBanner" class="banner" role="status" hidden></div>
+      <div class="hero">
+        <small>RECOMMENDED SELLING PRICE</small>
+        <strong id="r-recommended">—</strong>
+        <span id="r-basis">Fill in the form and press Calculate price.</span>
+        <button type="button" id="copyPrice" class="hero-btn" disabled>Copy price</button>
+      </div>
+      <div class="rows">
+        <div class="row"><div><span>UK purchase price</span><small id="r-uk-sub"></small></div><b id="r-uk">—</b></div>
+        <div class="row"><div><span>UK postage</span></div><b id="r-post">—</b></div>
+        <div class="row"><div><span>Exchange conversion</span><small id="r-conv-sub"></small></div><b id="r-conv">—</b></div>
+        <div class="row"><div><span>Eastwing shipping</span><small id="r-ship-sub"></small></div><b id="r-ship">—</b></div>
+        <div class="row"><div><span>Other expenses</span></div><b id="r-other">—</b></div>
+        <div class="row strong"><div><span>Total landed cost</span></div><b id="r-landed">—</b></div>
+        <div class="row"><div><span>Target profit</span></div><b id="r-target">—</b></div>
+        <div class="row strong"><div><span>Recommended selling price</span><small id="r-rec-sub"></small></div><b id="r-rec">—</b></div>
+        <div class="row strong"><div><span>Actual expected profit</span><small id="r-profit-sub"></small></div><b id="r-profit">—</b></div>
+        <div class="row" id="r-own-row" hidden><div><span id="r-own-label">Profit at your price</span></div><b id="r-own">—</b></div>
+      </div>
+      <button type="button" id="copyAll" class="secondary" disabled>Copy full breakdown</button>
+    </aside>
+  </div>
+
+  <section class="panel notes">
+    <h2>How the price is worked out</h2>
+    <p class="note"><b>Landed cost</b> = (UK price + UK postage) × exchange rate + Eastwing shipping + other expenses.<br>
+    <b>Recommended price</b> = landed cost + target profit, rounded <u>up</u> to the next K50. Expected profit is that rounded price minus landed cost.</p>
+    <p class="note">The auto-filled UK price is a benchmark (typical eBay UK sold price for a working, unlocked phone), not a guaranteed price — check the real listing, condition and battery, and type the actual price over it. The benchmark uplift only applies to the benchmark, never to a price you type.</p>
+    <p class="note" id="tariffNote2"></p>
+  </section>
+</main>
+<script src="js/config.js?v=2026-11-22"></script>
+<script src="js/catalogue.js?v=2026-11-22"></script>
+<script src="js/calc.js?v=2026-11-22"></script>
+<script src="js/app.js?v=2026-11-22"></script>
+</body>
+</html>

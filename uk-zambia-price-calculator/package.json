@@ -1,0 +1,12 @@
+{
+  "name": "uk-zambia-price-calculator",
+  "version": "2.0.0",
+  "private": true,
+  "description": "UK → Zambia iPhone landed-cost and selling-price calculator (static site, GitHub Pages)",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0"
+  }
+}
